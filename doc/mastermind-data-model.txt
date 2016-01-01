@@ -32,11 +32,11 @@
   "Returns the score as two components - exact-match and color-only-match"
   ,,,)
 
-(defn color-and-position-matches [guess secret]
+(defn color-and-position-matches [secret guess]
   "Returns the number of pegs in both the color and position"
   ,,,)
 
-(defn color-only-matches [guess secret]
+(defn color-only-matches [secret guess]
   "Returns the number of pegs with correct color but wrong position."
   ,,,)
 
