@@ -1,6 +1,5 @@
 (ns mastermind.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn color-and-position-matches [guess secret]
+  "Returns the number of pegs in both the color and position"
+  0)

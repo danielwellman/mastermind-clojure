@@ -2,6 +2,5 @@
   (:require [clojure.test :refer :all]
             [mastermind.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest color-and-position-matches-exact-matches-only
+	(is (= 0 (color-and-position-matches [1 1 1 1] [2 3 4 5]))))

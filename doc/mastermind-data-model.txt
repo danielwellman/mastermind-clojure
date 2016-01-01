@@ -20,12 +20,16 @@
 
 ## Functions
 
-(defn score-guess [secret guess]
-  "Returns the score as two components - exact-match and color-only-match"
-  ,,,)
+(defn valid-code-elements []
+  "Returns a vector of all valid elements (pegs)"
+  [ 1 2 3 4 5 6 ])   // Start with integers, but we could change to keywords :red :green etc.
 
 (defn correct-guess? [secret guess]
   "True if the guess matches the secret, false otherwise"
+  ,,,)
+
+(defn score-guess [secret guess]
+  "Returns the score as two components - exact-match and color-only-match"
   ,,,)
 
 (defn color-and-position-matches [guess secret]
