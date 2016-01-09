@@ -7,3 +7,7 @@
     	(fn [count [secret-value guess-value]] (+ count (if (= secret-value guess-value) 1 0))) 
     	0 position-pairs)
   ))
+
+(defn color-only-matches [secret guess]
+  "Returns the number of pegs with correct color but wrong position."
+  0)
