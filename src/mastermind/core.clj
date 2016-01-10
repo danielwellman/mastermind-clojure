@@ -11,7 +11,10 @@
 ; Private helper functions
 
 (defn transpose [m]
-  (apply mapv vector m))
+  (if (seq m)
+    (apply mapv vector m)
+    (empty m))
+  )
 
 (defn remove-matches [a b]
   "Returns a tuple of the inputs after removing exact position and color matches"

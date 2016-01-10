@@ -25,4 +25,5 @@
   (is (= 2 (color-only-matches [1 2 3 4] [5 1 6 2])) "Two matches")
   (is (= 3 (color-only-matches [1 2 3 4] [5 3 2 1])) "Three matches")
   (is (= 4 (color-only-matches [1 1 2 2] [2 2 1 1])) "Double colors, all matched in wrong position")
+  (is (= 0 (color-only-matches [1 2 3 4] [1 2 3 4])) "Winning guess has no matches")
 )
