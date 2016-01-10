@@ -34,3 +34,6 @@
   {:color-and-position-matches (color-and-position-matches secret guess)
    :color-only-matches (color-only-matches secret guess)})
 
+(defn correct-guess? [secret guess]
+  "True if the guess matches the secret, false otherwise"
+  (= secret guess))
