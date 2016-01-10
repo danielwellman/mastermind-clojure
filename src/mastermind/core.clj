@@ -29,4 +29,8 @@
     (reduce (fn [count [element frequency]] (+ count (min frequency (get guess-frequencies element 0))))
       0 secret-frequencies)))
 
+(defn score-guess [secret guess]
+  "Returns the score as two components - exact-match and color-only-match"
+  {:color-and-position-matches (color-and-position-matches secret guess)
+   :color-only-matches (color-only-matches secret guess)})
 
