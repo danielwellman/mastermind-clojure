@@ -17,9 +17,11 @@
 
 (deftest color-only-matches-same-color-different-positions
   (is (= 0 (color-only-matches [1 2 3 4] [5 6 5 6])) "No matches")
+  (is (= 0 (color-only-matches [1 2 3 4] [1 6 5 4])) "Ignores exact matches, no matches")
   (is (= 1 (color-only-matches [1 2 3 4] [5 5 5 1])) "One match")
   (is (= 1 (color-only-matches [1 2 3 4] [5 1 1 1])) "Surplus guessed")
   (is (= 1 (color-only-matches [1 1 2 2] [5 5 3 1])) "More colors in secret than guessed")
+  (is (= 1 (color-only-matches [1 2 3 4] [1 6 3 2])) "Ignores exact matches, One match")
   (is (= 2 (color-only-matches [1 2 3 4] [5 1 6 2])) "Two matches")
   (is (= 3 (color-only-matches [1 2 3 4] [5 3 2 1])) "Three matches")
   (is (= 4 (color-only-matches [1 1 2 2] [2 2 1 1])) "Double colors, all matched in wrong position")

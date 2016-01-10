@@ -8,6 +8,26 @@
     	0 position-pairs)
   ))
 
+; Private helper functions
+
+(defn transpose [m]
+  (apply mapv vector m))
+
+(defn remove-matches [a b]
+  "Returns a tuple of the inputs after removing exact position and color matches"
+  (let [position-pairs (map vector a b)]
+    (transpose (filter (fn [[x y]] (not (= x y))) position-pairs))    
+    )
+)
+
+; ... back to our API
+
 (defn color-only-matches [secret guess]
   "Returns the number of pegs with correct color but wrong position."
-  0)
+  (let [[secret-without-matches guess-without-matches] (remove-matches secret guess)
+        secret-frequencies (frequencies secret-without-matches)
+        guess-frequencies (frequencies guess-without-matches)]
+    (reduce (fn [count [element frequency]] (+ count (min frequency (get guess-frequencies element 0))))
+      0 secret-frequencies)))
+
+
