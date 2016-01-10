@@ -2,9 +2,6 @@
   (:require [clojure.test :refer :all]
             [mastermind.core :refer :all]))
 
-(deftest score-guess-reports-exact-and-inexact-matches
-  (is (= {:color-and-position-matches 2 :color-only-matches 1} (score-guess [1 2 3 4] [1 4 3 8]))))
-
 (deftest color-and-position-matches-exact-matches-only
 	(is (= 0 (color-and-position-matches [1 1 1 1] [2 3 4 5])) "Different numbers entirely")
   (is (= 0 (color-and-position-matches [1 2 3 4] [3 4 2 1])) "Same numbers but wrong positions")
@@ -30,3 +27,7 @@
   (is (= 4 (color-only-matches [1 1 2 2] [2 2 1 1])) "Double colors, all matched in wrong position")
   (is (= 0 (color-only-matches [1 2 3 4] [1 2 3 4])) "Winning guess has no matches")
 )
+
+(deftest score-guess-reports-exact-and-inexact-matches
+  (is (= {:color-and-position-matches 2 :color-only-matches 1} (score-guess [1 2 3 4] [1 4 3 8]))))
+
