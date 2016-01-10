@@ -5,23 +5,19 @@
   (let [position-pairs (map vector secret guess)]
     (reduce 
     	(fn [count [secret-value guess-value]] (+ count (if (= secret-value guess-value) 1 0))) 
-    	0 position-pairs)
-  ))
+    	0 position-pairs)))
 
 ; Private helper functions
 
 (defn transpose [m]
   (if (seq m)
     (apply mapv vector m)
-    (empty m))
-  )
+    (empty m)))
 
 (defn remove-matches [a b]
   "Returns a tuple of the inputs after removing exact position and color matches"
   (let [position-pairs (map vector a b)]
-    (transpose (filter (fn [[x y]] (not (= x y))) position-pairs))    
-    )
-)
+    (transpose (filter (fn [[x y]] (not (= x y))) position-pairs))))
 
 ; ... back to our API
 
