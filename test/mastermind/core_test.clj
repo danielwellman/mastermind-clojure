@@ -29,9 +29,14 @@
 )
 
 (deftest score-guess-reports-exact-and-inexact-matches
-  (is (= {:color-and-position-matches 2 :color-only-matches 1} (score-guess [1 2 3 4] [1 4 3 8]))))
+  (is (= { :color-and-position-matches 2 :color-only-matches 1 } (score-guess [1 2 3 4] [1 4 3 8]))))
 
 (deftest correct-guess-is-true-for-exact-match
   (is (true? (correct-guess? [1 2 3 4] [1 2 3 4])))
   (is (false? (correct-guess? [1 2 3 4] [4 3 2 1])))
-  (is (false? (correct-guess? [1 2 3 4] [5 6 7 8]))))
+  (is (false? (correct-guess? [1 2 3 4] [5 6 7 8])))
+)
+
+(deftest init-game-state-structure
+  (is (= { :number-turns 12 :secret [1 2 3 4] :turns [] :state :playing } (init-game-state [1 2 3 4])))
+)

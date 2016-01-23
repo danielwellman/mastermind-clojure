@@ -37,3 +37,10 @@
 (defn correct-guess? [secret guess]
   "True if the guess matches the secret, false otherwise"
   (= secret guess))
+
+(defn init-game-state [secret]
+  "Creates the game data structure"
+  { :number-turns 12
+    :secret secret
+    :turns []
+    :state :playing})
