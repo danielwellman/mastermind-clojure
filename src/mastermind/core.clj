@@ -52,8 +52,9 @@
 
 (defn guess [guess game-state]
   (let [{:keys [secret turns number-turns]} game-state]
-    (update (update game-state :turns #(conj % (score-guess secret guess)))
+    (update 
+      (update game-state :turns #(conj % (score-guess secret guess)))
       :state 
-        (fn [_] (game-status (correct-guess? secret guess) (inc (count turns)) number-turns)))
+      (fn [_] (game-status (correct-guess? secret guess) (inc (count turns)) number-turns)))
   )
 )
