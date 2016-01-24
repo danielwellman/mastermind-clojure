@@ -49,3 +49,117 @@
 (deftest init-game-state-structure
   (is (= { :number-turns 12 :secret [1 2 3 4] :turns [] :state :playing } (init-game-state [1 2 3 4])))
 )
+
+(deftest play-winning-guess
+  (is (= { :number-turns 12 
+           :secret [1 2 3 4] 
+           :turns [ 
+             { :guess [ 1 2 3 4] 
+               :exact-match? true 
+               :color-and-position-matches 4
+               :color-only-matches 0 } ]
+           :state :won }
+        (guess [ 1 2 3 4 ] 
+          { :number-turns 12 
+            :secret [ 1 2 3 4 ] 
+            :turns [ ]
+            :state :playing }
+          )))
+)
+
+(deftest play-incorrect-guess
+  (is (= { :number-turns 12 
+           :secret [1 2 3 4] 
+           :turns [ 
+             { :guess [ 5 5 5 5] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 } ]
+           :state :playing }
+        (guess [ 5 5 5 5 ] 
+          { :number-turns 12 
+            :secret [ 1 2 3 4 ] 
+            :turns [ ]
+           :state :playing }
+          )))
+)
+
+(deftest play-incorrect-guess-with-nonempty-game
+  (is (= { :number-turns 12 
+           :secret [1 2 3 4] 
+           :turns [ 
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 5 5 5 5] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 } ]
+           :state :playing }
+        (guess [ 5 5 5 5 ] 
+          { :number-turns 12 
+            :secret [ 1 2 3 4 ] 
+            :turns [ 
+              { :guess [ 6 6 6 6] 
+                :exact-match? false 
+                :color-and-position-matches 0 
+                :color-only-matches 0 }
+            ]
+           :state :playing }
+          )))
+)
+
+(deftest play-losing-game
+  (is (= :lost (:state 
+    (guess [5 5 5 5] 
+      { :number-turns 12 
+           :secret [1 2 3 4] 
+           :turns [               ; This input is sort of terrifying...
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 6 6 6 6] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 },
+             { :guess [ 5 5 5 5] 
+               :exact-match? false 
+               :color-and-position-matches 0 
+               :color-only-matches 0 } ]
+           :state :playing }      
+      )))) 
+)

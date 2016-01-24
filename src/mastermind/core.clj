@@ -41,9 +41,19 @@
         (< turns-taken max-game-turns) :playing
         :else :lost))
 
+; Game Public API
+
 (defn init-game-state [secret]
   "Creates the game data structure"
   { :number-turns 12
     :secret secret
     :turns []
     :state :playing})
+
+(defn guess [guess game-state]
+  (let [{:keys [secret turns number-turns]} game-state]
+    (update (update game-state :turns #(conj % (score-guess secret guess)))
+      :state 
+        (fn [_] (game-status (correct-guess? secret guess) (inc (count turns)) number-turns)))
+  )
+)

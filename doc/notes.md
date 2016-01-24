@@ -18,3 +18,12 @@ I debated between deciding if score-guess should return game winning information
 
 As I write 'game-status', I wonder whether to pass in a simple game-won? boolean as true or false, or if this should really be comparing the guess and secret.  I doubt myself a bit here.  I think again back to the previous note of not determining game winning state in more than one place, so I leave it as the client looking up the last turn's result.  --> _This will likely merit revisiting_.
 
+---
+
+I realize that using the game data structure object as something that is transformed by our public API functions means that tests will need to pass in the structure as one argument and make assertions on the resulting game data structure.  This starts to feel good to me because we are testing value objects with pure functions, so checking whole values doesn't seem like such a bad thing.  However, the game data structure feels slightly large-ish to me, and that means 
+
+- Repeating the structure in test inputs
+- Repeating assertions about the *entire* data structure in outputs
+- Diffs of large objects aren't so easy for me to read with the (is (= ...)) test failures; I wonder about some sort of smart large object diff
+
+This leads me to worry a bit about changing the data structure -- if I change it, will all the tests have to change?  I'm not yet sure what to do about this.  Writing assertions against portions of the data structure once the whole has been verified in a few tests might be a way to check this.
