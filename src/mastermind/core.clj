@@ -36,14 +36,14 @@
     :color-and-position-matches (color-and-position-matches secret guess)
     :color-only-matches (color-only-matches secret guess) })
 
+(defn game-status [guessed-secret? turns-taken max-game-turns]
+  (cond (true? guessed-secret?) :won
+        (< turns-taken max-game-turns) :playing
+        :else :lost))
+
 (defn init-game-state [secret]
   "Creates the game data structure"
   { :number-turns 12
     :secret secret
     :turns []
     :state :playing})
-
-(defn game-status [guessed-secret? turns-taken max-game-turns]
-  (cond (true? guessed-secret?) :won
-        (< turns-taken max-game-turns) :playing
-        :else :lost))
