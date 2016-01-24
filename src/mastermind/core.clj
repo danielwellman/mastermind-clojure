@@ -54,12 +54,9 @@
 (defn guess [guess game-state]
   "Return a new game applying the guess to the given game"
   (let [{:keys [secret turns max-turns]} game-state]
-    (assoc    ;; I want to update two keys on this object, with the first result flowing into the second
-      (update game-state :turns #(conj % (score-guess secret guess))) 
-      :state 
-      (game-status 
-        (correct-guess? secret guess) ; Because no access to :turns from previous update, I had to call score-guess again
-        (inc (count turns)) ;; I wish I had the updated structure's "turns" so I didn't have to inc it.
-        max-turns))
+    (-> game-state 
+      (update :turns #(conj % (score-guess secret guess)))
+      (assoc :state (game-status (correct-guess? secret guess) (inc (count turns)) max-turns))
+    )
   )
 )
