@@ -43,3 +43,9 @@
   (is (= { :number-turns 12 :secret [1 2 3 4] :turns [] :state :playing } (init-game-state [1 2 3 4])))
 )
 
+(deftest game-status-determines-win-lose-or-playing
+  (is (= :won (game-status true 1 12)) "Win if won? is true")
+  (is (= :playing (game-status false 1 12)) "Playing if not won and less than game max turns")
+  (is (= :playing (game-status false 11 12)) "Playing if one turn remaining")
+  (is (= :lost (game-status false 12 12)) "Lost if # turns taken = game max turns")
+)

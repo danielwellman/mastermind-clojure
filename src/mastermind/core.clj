@@ -43,3 +43,7 @@
     :turns []
     :state :playing})
 
+(defn game-status [guessed-secret? turns-taken max-game-turns]
+  (cond (true? guessed-secret?) :won
+        (< turns-taken max-game-turns) :playing
+        :else :lost))

@@ -13,3 +13,8 @@ Though I wonder at first how I might write a property to hold true for `color-an
 After implementing init-game and the scoring functions, I decided that score-guess returning only the exact and alternate place matches was not doing enough; I needed to return the data structure that :turns contains, which includes the :guess in the data structure.  I struggled trying to come up with another name -- produce-guess-data? guess->result?  So I made score-guess include a bit more information.
 
 I debated between deciding if score-guess should return game winning information or not.  I'm leaning now towards having that include whether it won or not, then the constituent match components.  It will mean a few levels of checking for if we won or not, but I think it will mean that only one place knows how to win a game (by the guess equalling the secret).
+
+---
+
+As I write 'game-status', I wonder whether to pass in a simple game-won? boolean as true or false, or if this should really be comparing the guess and secret.  I doubt myself a bit here.  I think again back to the previous note of not determining game winning state in more than one place, so I leave it as the client looking up the last turn's result.  --> _This will likely merit revisiting_.
+
