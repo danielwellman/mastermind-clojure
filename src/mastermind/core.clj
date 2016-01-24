@@ -29,14 +29,16 @@
     (reduce (fn [count [element frequency]] (+ count (min frequency (get guess-frequencies element 0))))
       0 secret-frequencies)))
 
-(defn score-guess [secret guess]
-  "Returns the score as two components - exact-match and color-only-match"
-  {:color-and-position-matches (color-and-position-matches secret guess)
-   :color-only-matches (color-only-matches secret guess)})
-
 (defn correct-guess? [secret guess]
   "True if the guess matches the secret, false otherwise"
   (= secret guess))
+
+(defn score-guess [secret guess]
+  "Returns the guess along with the score as two components - exact-match and color-only-match"
+  { :guess guess
+    :exact-match? (correct-guess? secret guess)
+    :color-and-position-matches (color-and-position-matches secret guess)
+    :color-only-matches (color-only-matches secret guess) })
 
 (defn init-game-state [secret]
   "Creates the game data structure"
@@ -44,3 +46,4 @@
     :secret secret
     :turns []
     :state :playing})
+

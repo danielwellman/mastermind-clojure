@@ -28,8 +28,10 @@
   (is (= 0 (color-only-matches [1 2 3 4] [1 2 3 4])) "Winning guess has no matches")
 )
 
-(deftest score-guess-reports-exact-and-inexact-matches
-  (is (= { :color-and-position-matches 2 :color-only-matches 1 } (score-guess [1 2 3 4] [1 4 3 8]))))
+(deftest score-guess-reports-guess-and-exact-and-inexact-matches
+  (is (= { :guess [1 4 3 8] :exact-match? false :color-and-position-matches 2 :color-only-matches 1 } (score-guess [1 2 3 4] [1 4 3 8])))
+  (is (true? (:exact-match? (score-guess [1 2 3 4] [1 2 3 4]))))
+)
 
 (deftest correct-guess-is-true-for-exact-match
   (is (true? (correct-guess? [1 2 3 4] [1 2 3 4])))
@@ -40,3 +42,4 @@
 (deftest init-game-state-structure
   (is (= { :number-turns 12 :secret [1 2 3 4] :turns [] :state :playing } (init-game-state [1 2 3 4])))
 )
+
