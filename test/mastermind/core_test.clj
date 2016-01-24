@@ -47,11 +47,11 @@
 )
 
 (deftest init-game-state-structure
-  (is (= { :number-turns 12 :secret [1 2 3 4] :turns [] :state :playing } (init-game-state [1 2 3 4])))
+  (is (= { :max-turns 12 :secret [1 2 3 4] :turns [] :state :playing } (init-game-state [1 2 3 4])))
 )
 
 (deftest play-winning-guess
-  (is (= { :number-turns 12 
+  (is (= { :max-turns 12 
            :secret [1 2 3 4] 
            :turns [ 
              { :guess [ 1 2 3 4] 
@@ -60,7 +60,7 @@
                :color-only-matches 0 } ]
            :state :won }
         (guess [ 1 2 3 4 ] 
-          { :number-turns 12 
+          { :max-turns 12 
             :secret [ 1 2 3 4 ] 
             :turns [ ]
             :state :playing }
@@ -68,7 +68,7 @@
 )
 
 (deftest play-incorrect-guess
-  (is (= { :number-turns 12 
+  (is (= { :max-turns 12 
            :secret [1 2 3 4] 
            :turns [ 
              { :guess [ 5 5 5 5] 
@@ -77,7 +77,7 @@
                :color-only-matches 0 } ]
            :state :playing }
         (guess [ 5 5 5 5 ] 
-          { :number-turns 12 
+          { :max-turns 12 
             :secret [ 1 2 3 4 ] 
             :turns [ ]
            :state :playing }
@@ -85,7 +85,7 @@
 )
 
 (deftest play-incorrect-guess-with-nonempty-game
-  (is (= { :number-turns 12 
+  (is (= { :max-turns 12 
            :secret [1 2 3 4] 
            :turns [ 
              { :guess [ 6 6 6 6] 
@@ -98,7 +98,7 @@
                :color-only-matches 0 } ]
            :state :playing }
         (guess [ 5 5 5 5 ] 
-          { :number-turns 12 
+          { :max-turns 12 
             :secret [ 1 2 3 4 ] 
             :turns [ 
               { :guess [ 6 6 6 6] 
@@ -113,7 +113,7 @@
 (deftest play-losing-game
   (is (= :lost (:state 
     (guess [5 5 5 5] 
-      { :number-turns 12 
+      { :max-turns 12 
            :secret [1 2 3 4] 
            :turns [               ; This input is sort of terrifying...
              { :guess [ 6 6 6 6] 
