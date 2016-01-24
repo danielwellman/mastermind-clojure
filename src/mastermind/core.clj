@@ -37,6 +37,7 @@
     :color-only-matches (color-only-matches secret guess) })
 
 (defn game-status [guessed-secret? turns-taken max-game-turns]
+  "Indicate if the game was won, lost, or still playing"
   (cond (true? guessed-secret?) :won
         (< turns-taken max-game-turns) :playing
         :else :lost))
@@ -51,6 +52,7 @@
     :state :playing})
 
 (defn guess [guess game-state]
+  "Return a new game applying the guess to the given game"
   (let [{:keys [secret turns max-turns]} game-state]
     (update    ;; I want to update two keys on this object, with the first result flowing into the second
       (update game-state :turns #(conj % (score-guess secret guess))) 
