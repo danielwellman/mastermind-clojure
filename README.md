@@ -1,6 +1,8 @@
 # mastermind
 
-An implementation of the game [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game).
+An implementation of the game [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game).  
+
+This is my first Clojure project, so please don't treat this as idiomatic Clojure.  If you have any suggestions for me, please let me know.  Thanks!
 
 See a description of the game's data structure in `doc/mastermind-data-model.txt`.  I attempted to create this data model first then build up the transformation functions.
 
